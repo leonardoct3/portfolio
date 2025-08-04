@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { db } from '../services/database.js';
+import { sendContactNotification, sendContactConfirmation } from '../utils/emailsender.js';
 
 export const createContactMessage = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -30,6 +31,20 @@ export const createContactMessage = async (req: Request, res: Response): Promise
             subject,
             message
         });
+
+        // Send email notifications
+        try {
+            // Send notification to you
+            await sendContactNotification(contactMessage);
+            
+            // Send confirmation to the user
+            await sendContactConfirmation(contactMessage);
+            
+            console.log('Email notifications sent successfully');
+        } catch (emailError) {
+            console.error('Failed to send email notifications:', emailError);
+            // Don't fail the entire request if email fails
+        }
 
         res.status(201).json({
             success: true,

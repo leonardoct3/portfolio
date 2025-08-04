@@ -20,14 +20,22 @@ This backend has been configured to work with Supabase as the database provider.
 
 ### 3. Update Environment Variables
 
-Update your `.env` file with your Supabase credentials:
+Update your `.env` file with your Supabase credentials and email configuration:
 
 ```env
 # Supabase Configuration
 SUPABASE_URL=https://your-project-id.supabase.co
 SUPABASE_ANON_KEY=your_public_anon_key_here
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
+
+# Email Configuration (Gmail)
+EMAIL_USER=your_gmail@gmail.com
+EMAIL_PASS=your_16_character_app_password
+EMAIL_FROM=your_gmail@gmail.com
+EMAIL_TO=your_gmail@gmail.com
 ```
+
+**Note**: For Gmail setup instructions, see `GMAIL_SETUP.md`
 
 ### 4. Set Up Database Tables
 
@@ -77,9 +85,14 @@ Test the API endpoints:
 
 ### Contact Messages
 
-- **POST** `/api/contact` - Send contact message
+- **POST** `/api/contact` - Send contact message (saves to DB + sends emails)
 - **GET** `/api/contact` - Get all contact messages (admin)
 - **DELETE** `/api/contact/:id` - Delete contact message (admin)
+
+**Email Notifications**: When a contact message is submitted:
+1. The message is saved to the database
+2. A notification email is sent to you with the contact details
+3. A confirmation email is sent to the person who contacted you
 
 #### Contact Message Schema
 ```json
