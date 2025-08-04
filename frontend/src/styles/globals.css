@@ -1,0 +1,15 @@
+* {
+    font-family: 'Segoe UI'; /* Coloquem aqui a fonte do Mockup, tropa */
+}
+
+body {
+    margin: 0;
+    font-family: 'Lora'; /* Coloquem aqui a fonte do Mockup, tropa */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
