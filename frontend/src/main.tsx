@@ -1,10 +1,15 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/tailwind.css'
-import App from './App.tsx'
+import { Toaster } from 'react-hot-toast'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+    <>
+      <RouterProvider router={router} />
+      <Toaster 
+        position='bottom-right'
+      />
+    </>
+    
 )
