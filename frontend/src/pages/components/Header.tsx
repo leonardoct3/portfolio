@@ -52,13 +52,13 @@ export const Header = ({ activeSection }: HeaderProps) => {
   ];
 
   return (
-    <header className="bg-black dark:bg-gray-900 text-white w-full flex justify-between items-center px-6 py-5 fixed top-0 z-50 shadow-lg">
+    <header className="bg-white dark:bg-gray-900 text-black dark:text-white w-full flex justify-between items-center px-6 py-5 fixed top-0 z-50 shadow-lg">
       {/* Logo/Name */}
       <div className="flex items-center">
         <h1 className="text-2xl font-bold">
           <a 
             href="#home" 
-            className="text-white hover:text-red-600 transition-colors duration-300 no-underline"
+            className="text-black dark:text-white hover:!text-red-600 transition-colors duration-300 no-underline"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('home');
@@ -76,8 +76,8 @@ export const Header = ({ activeSection }: HeaderProps) => {
             <li key={item.label}>
               <a
                 href={item.href}
-                className={`text-white hover:text-red-600 hover:underline font-bold text-sm transition-all duration-300 no-underline ${
-                  activeSection === item.href.substring(1) ? 'text-red-600 underline' : ''
+                className={`text-black dark:text-white hover:!text-red-600 hover:underline font-bold text-sm transition-all duration-300 no-underline ${
+                  activeSection === item.href.substring(1) ? '!text-red-600 underline' : ''
                 }`}
                 onClick={(e) => {
                   e.preventDefault();
@@ -98,14 +98,14 @@ export const Header = ({ activeSection }: HeaderProps) => {
           variant="ghost"
           size="icon"
           onClick={toggleDarkMode}
-          className="text-white hover:text-red-600 hover:bg-gray-800"
+          className="text-black dark:text-white hover:!text-red-600 hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </Button>
 
         {/* Contact Me Button */}
         <Button
-          className="bg-white text-black hover:bg-red-600 hover:text-white font-bold px-5 py-2 rounded transition-all duration-300 hidden sm:block"
+          className="bg-red-600 text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black font-bold px-5 py-2 rounded transition-all duration-300 hidden sm:block border-2 border-red-600 hover:border-black dark:hover:border-white shadow-lg hover:shadow-xl"
           onClick={() => scrollToSection('contact')}
         >
           Contact Me!

@@ -18,6 +18,7 @@ import {
 
 export const Portfolio = () => {
   const [init, setInit] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // this should be run only once per application lifetime
   useEffect(() => {
@@ -26,6 +27,23 @@ export const Portfolio = () => {
     }).then(() => {
       setInit(true);
     });
+  }, []);
+
+  // Watch for theme changes
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    };
+
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
@@ -63,13 +81,13 @@ export const Portfolio = () => {
       },
       particles: {
         color: {
-          value: "#ffffff",
+          value: isDarkMode ? "#ffffff" : "#000000",
         },
         links: {
-          color: "#ffffff",
+          color: isDarkMode ? "#ffffff" : "#666666",
           distance: 150,
           enable: true,
-          opacity: 0.3,
+          opacity: isDarkMode ? 0.3 : 0.2,
           width: 1,
         },
         move: {
@@ -89,7 +107,7 @@ export const Portfolio = () => {
           value: 50,
         },
         opacity: {
-          value: 0.3,
+          value: isDarkMode ? 0.3 : 0.4,
         },
         shape: {
           type: "circle",
@@ -100,7 +118,7 @@ export const Portfolio = () => {
       },
       detectRetina: true,
     }),
-    [],
+    [isDarkMode],
   );
 
   return (

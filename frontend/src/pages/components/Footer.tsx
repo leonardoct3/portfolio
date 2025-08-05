@@ -24,7 +24,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-black text-white py-12 px-6">
+    <footer className="bg-white dark:bg-gray-900 text-black dark:text-white py-12 px-6 shadow-lg border-t-2 border-gray-200 dark:border-gray-700">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center space-y-8">
           {/* Navigation */}
@@ -34,7 +34,7 @@ export const Footer = () => {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="text-white hover:text-red-600 hover:underline transition-all duration-300 no-underline"
+                    className="text-black dark:text-white hover:text-red-600 hover:underline transition-all duration-300 no-underline"
                     onClick={(e) => {
                       e.preventDefault();
                       scrollToSection(item.href.substring(1));
@@ -57,7 +57,7 @@ export const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-red-600 transform hover:scale-110 transition-all duration-300"
+                  className="text-black dark:text-white hover:text-red-600 transform hover:scale-110 transition-all duration-300"
                   aria-label={social.label}
                 >
                   <Icon className="w-6 h-6" />
@@ -67,7 +67,7 @@ export const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="text-center text-gray-400">
+          <div className="text-center text-gray-500 dark:text-gray-400">
             <p>&copy; 2025 Leonardo. All rights reserved.</p>
           </div>
         </div>
