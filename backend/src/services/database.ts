@@ -1,5 +1,5 @@
 import { supabaseAdmin } from '../config/supabase.js';
-import type { Project, ContactMessage } from '../models/types.js';
+import type { Project, Experience, ContactMessage } from '../models/types.js';
 
 export class DatabaseService {
     // Project operations
@@ -75,6 +75,82 @@ export class DatabaseService {
 
         if (error) {
             throw new Error(`Failed to delete project: ${error.message}`);
+        }
+    }
+
+    // Experience operations
+    async getAllExperiences(): Promise<Experience[]> {
+        const { data, error } = await supabaseAdmin
+            .from('experiences')
+            .select('*')
+            .order('start_date', { ascending: false });
+
+        if (error) {
+            throw new Error(`Failed to fetch experiences: ${error.message}`);
+        }
+
+        return data || [];
+    }
+
+    async getExperienceById(id: number): Promise<Experience | null> {
+        const { data, error } = await supabaseAdmin
+            .from('experiences')
+            .select('*')
+            .eq('id', id)
+            .single();
+
+        if (error) {
+            if (error.code === 'PGRST116') {
+                return null; // Experience not found
+            }
+            throw new Error(`Failed to fetch experience: ${error.message}`);
+        }
+
+        return data;
+    }
+
+    async createExperience(experience: Omit<Experience, 'id' | 'created_at' | 'updated_at'>): Promise<Experience> {
+        const { data, error } = await supabaseAdmin
+            .from('experiences')
+            .insert([experience])
+            .select()
+            .single();
+
+        if (error) {
+            throw new Error(`Failed to create experience: ${error.message}`);
+        }
+
+        return data;
+    }
+
+    async updateExperience(id: number, updates: Partial<Omit<Experience, 'id' | 'created_at'>>): Promise<Experience> {
+        const updateData = {
+            ...updates,
+            updated_at: new Date().toISOString()
+        };
+
+        const { data, error } = await supabaseAdmin
+            .from('experiences')
+            .update(updateData)
+            .eq('id', id)
+            .select()
+            .single();
+
+        if (error) {
+            throw new Error(`Failed to update experience: ${error.message}`);
+        }
+
+        return data;
+    }
+
+    async deleteExperience(id: number): Promise<void> {
+        const { error } = await supabaseAdmin
+            .from('experiences')
+            .delete()
+            .eq('id', id);
+
+        if (error) {
+            throw new Error(`Failed to delete experience: ${error.message}`);
         }
     }
 

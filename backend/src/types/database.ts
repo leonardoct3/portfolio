@@ -45,6 +45,45 @@ export interface Database {
         }
         Relationships: []
       }
+      experiences: {
+        Row: {
+          id: number
+          title: string
+          company: string
+          location: string
+          start_date: string
+          end_date: string
+          description: string
+          skills: string[]
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          title: string
+          company: string
+          location: string
+          start_date: string
+          end_date: string
+          description: string
+          skills?: string[]
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          title?: string
+          company?: string
+          location?: string
+          start_date?: string
+          end_date?: string
+          description?: string
+          skills?: string[]
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           id: number

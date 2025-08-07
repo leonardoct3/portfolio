@@ -10,6 +10,19 @@ export interface Project {
     updated_at?: string;
 }
 
+export interface Experience {
+    id: number;
+    title: string;
+    company: string;
+    location: string;
+    start_date: string;
+    end_date: string;
+    description: string;
+    skills: string[];
+    created_at?: string;
+    updated_at?: string;
+}
+
 export interface ContactMessage {
     id?: number;
     name: string;

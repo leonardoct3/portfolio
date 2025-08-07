@@ -1,11 +1,15 @@
 import { Router } from 'express';
 import projectRoutes from './projectRoutes.js';
+import experienceRoutes from './experienceRoutes.js';
 import contactRoutes from './contactRoutes.js';
 
 const router = Router();
 
 // Mount project routes
 router.use('/projects', projectRoutes);
+
+// Mount experience routes
+router.use('/experiences', experienceRoutes);
 
 // Mount contact routes
 router.use('/contact', contactRoutes);
