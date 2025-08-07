@@ -10,7 +10,7 @@ export const Footer = () => {
 
   const navItems = [
     { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
+    { label: "Experiences", href: "#experiences" },
     { label: "Skills", href: "#skills" },
     { label: "Projects", href: "#projects" },
     { label: "Contact", href: "#contact" },
@@ -24,7 +24,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white dark:bg-gray-900 text-black dark:text-white py-12 px-6 shadow-lg border-t-2 border-gray-200 dark:border-gray-700">
+    <footer className="bg-white dark:bg-gray-900 text-black dark:text-white py-12 px-6 shadow-lg relative z-50">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center space-y-8">
           {/* Navigation */}

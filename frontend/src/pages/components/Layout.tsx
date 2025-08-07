@@ -27,7 +27,7 @@ export const Layout = ({ children }: LayoutProps) => {
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     // Observe all sections
-    const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+    const sections = ['home', 'experiences', 'skills', 'projects', 'contact'];
     sections.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
       if (element) {

@@ -45,7 +45,7 @@ export const Header = ({ activeSection }: HeaderProps) => {
 
   const navItems = [
     { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
+    { label: "Experiences", href: "#experiences" },
     { label: "Skills", href: "#skills" },
     { label: "Projects", href: "#projects" },
     { label: "Contact", href: "#contact" },

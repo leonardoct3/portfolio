@@ -10,7 +10,7 @@ import { loadSlim } from "@tsparticles/slim";
 import { Layout } from "./components/Layout";
 import { 
   HomeSection, 
-  AboutSection, 
+  ExperiencesSection, 
   SkillsSection, 
   ProjectsSection, 
   ContactSection 
@@ -137,7 +137,7 @@ export const Portfolio = () => {
       {/* Main content */}
       <div className="relative z-10">
         <HomeSection />
-        <AboutSection />
+        <ExperiencesSection />
         <SkillsSection />
         <ProjectsSection />
         <ContactSection />
