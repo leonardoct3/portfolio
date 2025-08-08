@@ -155,7 +155,7 @@ export const ProjectsSection = () => {
                             <img 
                               src={project.image_url} 
                               alt={project.title}
-                              className="w-full h-48 object-cover"
+                              className="w-full object-contain bg-gray-50 dark:bg-gray-800"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
