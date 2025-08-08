@@ -57,10 +57,10 @@ export const Header = ({ activeSection }: HeaderProps) => {
   ];
 
   return (
-    <header className="bg-white dark:bg-gray-900 text-black dark:text-white w-full flex justify-between items-center px-6 py-5 fixed top-0 z-50 shadow-lg">
+    <header className="bg-white dark:bg-gray-900 text-black dark:text-white w-full flex justify-between items-center px-4 sm:px-6 py-4 sm:py-5 fixed top-0 z-50 shadow-lg">
       {/* Logo/Name */}
-      <div className="flex items-center">
-        <h1 className="text-2xl font-bold">
+      <div className="flex items-center flex-shrink-0">
+        <h1 className="text-xl sm:text-2xl font-bold">
           <a 
             href="#home" 
             className="text-black dark:text-white hover:!text-red-600 transition-colors duration-300 no-underline"
@@ -97,29 +97,24 @@ export const Header = ({ activeSection }: HeaderProps) => {
       </nav>
 
       {/* Right side buttons */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
         {/* Dark mode toggle */}
         <Button
           variant="ghost"
           size="icon"
           onClick={toggleDarkMode}
-          className="text-black dark:text-white hover:!text-red-600 hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="text-black dark:text-white hover:!text-red-600 hover:bg-gray-100 dark:hover:bg-gray-800 w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center"
         >
-          {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          {isDarkMode ? <Sun className="h-4 w-4 sm:h-5 sm:w-5" /> : <Moon className="h-4 w-4 sm:h-5 sm:w-5" />}
         </Button>
 
         {/* Contact Me Button */}
         <Button
-          className="bg-red-600 text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black font-bold px-5 py-2 rounded transition-all duration-300 hidden sm:block border-2 border-red-600 hover:border-black dark:hover:border-white shadow-lg hover:shadow-xl"
+          className="bg-red-600 text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black font-bold px-3 py-2 sm:px-5 sm:py-2 rounded transition-all duration-300 border-2 border-red-600 hover:border-black dark:hover:border-white shadow-lg hover:shadow-xl text-xs sm:text-sm h-10 sm:h-auto flex items-center justify-center"
           onClick={() => scrollToSection('contact')}
         >
           Contact Me!
         </Button>
-      </div>
-
-      {/* Mobile Navigation Menu (you can expand this later) */}
-      <div className="md:hidden">
-        {/* Mobile menu button - can be implemented later */}
       </div>
     </header>
   );

@@ -48,94 +48,222 @@ export const sendContactNotification = async (contactMessage: ContactMessage): P
         <html>
         <head>
             <meta charset="utf-8">
-            <title>New Contact Form Submission</title>
+            <title>New Contact Form Submission - Leonardo Teixeira Portfolio</title>
             <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+                
                 body {
-                    font-family: Arial, sans-serif;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                     line-height: 1.6;
-                    color: #333;
+                    color: #111827;
+                    background-color: #f9fafb;
+                    padding: 20px;
+                }
+                
+                .email-container {
                     max-width: 600px;
                     margin: 0 auto;
-                    padding: 20px;
+                    background-color: #ffffff;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                    overflow: hidden;
+                    border: 2px solid #e5e7eb;
                 }
+                
                 .header {
-                    background-color: #f4f4f4;
-                    padding: 20px;
-                    border-radius: 5px;
-                    margin-bottom: 20px;
+                    background: linear-gradient(135deg, #111827 0%, #374151 100%);
+                    color: white;
+                    padding: 30px;
+                    text-align: center;
+                    position: relative;
                 }
+                
+                .header::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+                }
+                
+                .header h1 {
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                    letter-spacing: -0.025em;
+                }
+                
+                .header p {
+                    font-size: 14px;
+                    opacity: 0.9;
+                    font-weight: 400;
+                }
+                
                 .content {
-                    background-color: #fff;
-                    padding: 20px;
-                    border: 1px solid #ddd;
-                    border-radius: 5px;
+                    padding: 30px;
+                    background-color: #ffffff;
                 }
+                
+                .field-grid {
+                    display: grid;
+                    gap: 20px;
+                    margin-bottom: 25px;
+                }
+                
                 .field {
-                    margin-bottom: 15px;
-                    padding: 10px;
-                    background-color: #f9f9f9;
-                    border-radius: 3px;
+                    border: 2px solid #f3f4f6;
+                    border-radius: 8px;
+                    padding: 16px;
+                    background-color: #fafbfc;
+                    transition: all 0.2s ease;
                 }
+                
+                .field:hover {
+                    border-color: #e5e7eb;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                }
+                
                 .field-label {
-                    font-weight: bold;
-                    color: #555;
-                    margin-bottom: 5px;
+                    font-weight: 700;
+                    color: #374151;
+                    font-size: 14px;
+                    margin-bottom: 8px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
                 }
+                
                 .field-value {
-                    margin-top: 5px;
+                    font-size: 16px;
+                    color: #111827;
+                    line-height: 1.5;
                 }
+                
+                .field-value a {
+                    color: #dc2626;
+                    text-decoration: none;
+                    font-weight: 600;
+                }
+                
+                .field-value a:hover {
+                    text-decoration: underline;
+                }
+                
+                .message-field {
+                    border: 2px solid #f3f4f6;
+                    border-radius: 8px;
+                    padding: 20px;
+                    background-color: #ffffff;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                }
+                
                 .message-content {
-                    background-color: #fff;
-                    border: 1px solid #ccc;
-                    padding: 15px;
-                    border-radius: 3px;
+                    background-color: #f9fafb;
+                    border: 1px solid #e5e7eb;
+                    padding: 16px;
+                    border-radius: 6px;
                     white-space: pre-wrap;
+                    font-size: 15px;
+                    line-height: 1.6;
+                    color: #374151;
+                    margin-top: 8px;
                 }
+                
                 .footer {
-                    margin-top: 20px;
-                    padding: 15px;
-                    background-color: #f4f4f4;
-                    border-radius: 5px;
+                    background-color: #f9fafb;
+                    padding: 20px 30px;
+                    text-align: center;
+                    border-top: 2px solid #f3f4f6;
+                }
+                
+                .footer p {
+                    font-size: 13px;
+                    color: #6b7280;
+                    margin-bottom: 4px;
+                }
+                
+                .timestamp {
                     font-size: 12px;
-                    color: #666;
+                    color: #9ca3af;
+                    font-weight: 600;
+                    background-color: #ffffff;
+                    padding: 8px 12px;
+                    border-radius: 6px;
+                    display: inline-block;
+                    border: 1px solid #e5e7eb;
+                    margin-top: 8px;
+                }
+                
+                .brand-accent {
+                    color: #dc2626;
+                    font-weight: 700;
+                }
+                
+                @media (max-width: 600px) {
+                    .email-container {
+                        margin: 10px;
+                        border-radius: 8px;
+                    }
+                    
+                    .header, .content, .footer {
+                        padding: 20px;
+                    }
+                    
+                    .header h1 {
+                        font-size: 20px;
+                    }
                 }
             </style>
         </head>
         <body>
-            <div class="header">
-                <h1>📧 New Contact Form Submission</h1>
-                <p>You've received a new message through your portfolio contact form.</p>
-            </div>
-            
-            <div class="content">
-                <div class="field">
-                    <div class="field-label">👤 Name:</div>
-                    <div class="field-value">${name}</div>
+            <div class="email-container">
+                <div class="header">
+                    <h1>New Portfolio Contact</h1>
+                    <p>Someone has reached out through your portfolio website</p>
                 </div>
                 
-                <div class="field">
-                    <div class="field-label">📧 Email:</div>
-                    <div class="field-value">
-                        <a href="mailto:${email}">${email}</a>
+                <div class="content">
+                    <div class="field-grid">
+                        <div class="field">
+                            <div class="field-label">Contact Name</div>
+                            <div class="field-value">${name}</div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="field-label">Email Address</div>
+                            <div class="field-value">
+                                <a href="mailto:${email}">${email}</a>
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="field-label">Subject</div>
+                            <div class="field-value">${subject}</div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="field">
-                    <div class="field-label">📋 Subject:</div>
-                    <div class="field-value">${subject}</div>
-                </div>
-                
-                <div class="field">
-                    <div class="field-label">💬 Message:</div>
-                    <div class="field-value">
+                    
+                    <div class="message-field">
+                        <div class="field-label">Message Content</div>
                         <div class="message-content">${message}</div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="footer">
-                <p>This email was sent automatically from your portfolio contact form.</p>
-                <p>Timestamp: ${new Date().toLocaleString()}</p>
+                
+                <div class="footer">
+                    <p>This notification was sent automatically from <span class="brand-accent">Leo</span>nardo Teixeira's portfolio contact form.</p>
+                    <div class="timestamp">Received on ${new Date().toLocaleDateString('en-US', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })}</div>
+                </div>
             </div>
         </body>
         </html>
@@ -143,8 +271,9 @@ export const sendContactNotification = async (contactMessage: ContactMessage): P
 
     // Plain text version
     const textContent = `
-New Contact Form Submission
+New Portfolio Contact Submission - Leonardo Teixeira
 
+Contact Details:
 Name: ${name}
 Email: ${email}
 Subject: ${subject}
@@ -153,13 +282,20 @@ Message:
 ${message}
 
 ---
-This email was sent automatically from your portfolio contact form.
-Timestamp: ${new Date().toLocaleString()}
+This notification was sent automatically from Leonardo Teixeira's portfolio contact form.
+Received on ${new Date().toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+})}
     `;
 
     const emailOptions: EmailOptions = {
         to: process.env.EMAIL_TO || process.env.EMAIL_USER || '',
-        subject: `Portfolio Contact: ${subject}`,
+        subject: `[INTERNAL] Portfolio Contact: ${subject}`,
         html: htmlContent,
         text: textContent
     };
@@ -175,81 +311,215 @@ export const sendContactConfirmation = async (contactMessage: ContactMessage): P
         <html>
         <head>
             <meta charset="utf-8">
-            <title>Thank you for contacting us</title>
+            <title>Thank you for contacting Leonardo Teixeira</title>
             <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+                
                 body {
-                    font-family: Arial, sans-serif;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                     line-height: 1.6;
-                    color: #333;
+                    color: #111827;
+                    background-color: #f9fafb;
+                    padding: 20px;
+                }
+                
+                .email-container {
                     max-width: 600px;
                     margin: 0 auto;
-                    padding: 20px;
+                    background-color: #ffffff;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                    overflow: hidden;
+                    border: 2px solid #e5e7eb;
                 }
+                
                 .header {
-                    background-color: #4CAF50;
+                    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
                     color: white;
-                    padding: 20px;
-                    border-radius: 5px;
-                    margin-bottom: 20px;
+                    padding: 40px 30px;
                     text-align: center;
+                    position: relative;
                 }
+                
+                .header::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+                }
+                
+                .header h1 {
+                    font-size: 28px;
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                    letter-spacing: -0.025em;
+                }
+                
+                .header p {
+                    font-size: 16px;
+                    opacity: 0.95;
+                    font-weight: 400;
+                }
+                
                 .content {
-                    background-color: #fff;
-                    padding: 20px;
-                    border: 1px solid #ddd;
-                    border-radius: 5px;
+                    padding: 40px 30px;
+                    background-color: #ffffff;
                 }
+                
+                .greeting {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #111827;
+                    margin-bottom: 20px;
+                }
+                
+                .message-body {
+                    font-size: 16px;
+                    color: #374151;
+                    margin-bottom: 20px;
+                }
+                
+                .subject-highlight {
+                    color: #dc2626;
+                    font-weight: 600;
+                    background-color: #fef2f2;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    border: 1px solid #fecaca;
+                }
+                
+                .signature {
+                    margin-top: 30px;
+                    padding-top: 20px;
+                    border-top: 2px solid #f3f4f6;
+                }
+                
+                .signature-name {
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #111827;
+                    margin-bottom: 4px;
+                }
+                
+                .signature-title {
+                    font-size: 14px;
+                    color: #6b7280;
+                    font-weight: 500;
+                }
+                
                 .footer {
-                    margin-top: 20px;
-                    padding: 15px;
-                    background-color: #f4f4f4;
-                    border-radius: 5px;
-                    font-size: 12px;
-                    color: #666;
+                    background-color: #f9fafb;
+                    padding: 25px 30px;
                     text-align: center;
+                    border-top: 2px solid #f3f4f6;
+                }
+                
+                .footer p {
+                    font-size: 13px;
+                    color: #6b7280;
+                    margin-bottom: 5px;
+                }
+                
+                .footer .timestamp {
+                    font-size: 12px;
+                    color: #9ca3af;
+                    font-weight: 500;
+                }
+                
+                .brand-accent {
+                    color: #dc2626;
+                    font-weight: 700;
+                }
+                
+                @media (max-width: 600px) {
+                    .email-container {
+                        margin: 10px;
+                        border-radius: 8px;
+                    }
+                    
+                    .header, .content, .footer {
+                        padding: 25px 20px;
+                    }
+                    
+                    .header h1 {
+                        font-size: 24px;
+                    }
                 }
             </style>
         </head>
         <body>
-            <div class="header">
-                <h1>✅ Message Received!</h1>
-                <p>Thank you for reaching out</p>
-            </div>
-            
-            <div class="content">
-                <p>Hi ${name},</p>
+            <div class="email-container">
+                <div class="header">
+                    <h1>Message Received Successfully</h1>
+                    <p>Thank you for reaching out through my portfolio</p>
+                </div>
                 
-                <p>Thank you for contacting me through my portfolio! I've received your message about "<strong>${subject}</strong>" and I'll get back to you as soon as possible.</p>
+                <div class="content">
+                    <div class="greeting">Hello ${name},</div>
+                    
+                    <div class="message-body">
+                        <p>Thank you for contacting me through my portfolio website. I have successfully received your message regarding <span class="subject-highlight">"${subject}"</span> and I appreciate you taking the time to reach out.</p>
+                        <br />
+                        <p>I will review your message carefully and respond as soon as possible. Typically, I aim to respond within 24-48 hours.</p>
+                        
+                    </div>
+                    
+                    <div class="signature">
+                        <div class="signature-name"><span class="brand-accent">Leo</span>nardo Teixeira</div>
+                        <div class="signature-title">Software Developer</div>
+                    </div>
+                </div>
                 
-                <p>Your message is important to me, and I typically respond within 24-48 hours during business days.</p>
-                
-                <p>Best regards,<br>
-                [Your Name]</p>
-            </div>
-            
-            <div class="footer">
-                <p>This is an automated confirmation email.</p>
-                <p>Please do not reply to this email.</p>
+                <div class="footer">
+                    <p>This is an automated confirmation email from Leonardo Teixeira's portfolio.</p>
+                    <p>Please do not reply directly to this email address.</p>
+                    <div class="timestamp">Sent on ${new Date().toLocaleDateString('en-US', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })}</div>
+                </div>
             </div>
         </body>
         </html>
     `;
 
     const textContent = `
-Thank you for contacting me!
+Thank you for contacting Leonardo Teixeira
 
-Hi ${name},
+Hello ${name},
 
-Thank you for reaching out through my portfolio! I've received your message about "${subject}" and I'll get back to you as soon as possible.
+Thank you for contacting me through my portfolio website. I have successfully received your message regarding "${subject}" and I appreciate you taking the time to reach out.
 
-Your message is important to me, and I typically respond within 24-48 hours during business days.
+I will review your message carefully and respond as soon as possible. Typically, I aim to respond within 24-48 hours during business days.
+
+If your inquiry is urgent, please feel free to mention that in your original message, and I will prioritize accordingly.
 
 Best regards,
-[Your Name]
+Leonardo Teixeira
+Software Developer
 
 ---
-This is an automated confirmation email.
-Please do not reply to this email.
+This is an automated confirmation email from Leonardo Teixeira's portfolio.
+Please do not reply directly to this email address.
+Sent on ${new Date().toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+})}
     `;
 
     const emailOptions: EmailOptions = {
