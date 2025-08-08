@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS projects (
     technologies TEXT[] NOT NULL,
     github_url VARCHAR(500),
     live_url VARCHAR(500),
-    image_url VARCHAR(500),
+    image BYTEA,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -62,30 +62,27 @@ CREATE TRIGGER update_experiences_updated_at
     EXECUTE FUNCTION update_updated_at_column();
 
 -- Insert some sample data (optional)
-INSERT INTO projects (title, description, technologies, github_url, live_url, image_url) VALUES
+INSERT INTO projects (title, description, technologies, github_url, live_url) VALUES
 (
     'Portfolio Website',
     'A modern, responsive portfolio website built with React and TypeScript, featuring a clean design and smooth animations.',
     ARRAY['React', 'TypeScript', 'Vite', 'Express', 'Supabase'],
     'https://github.com/yourusername/portfolio',
-    'https://yourportfolio.com',
-    '/images/portfolio.jpg'
+    'https://yourportfolio.com'
 ),
 (
     'Task Management App',
     'A full-stack task management application with real-time updates, user authentication, and collaborative features.',
     ARRAY['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'NextAuth.js'],
     'https://github.com/yourusername/task-manager',
-    'https://taskmanager.example.com',
-    '/images/task-manager.jpg'
+    'https://taskmanager.example.com'
 ),
 (
     'E-commerce Platform',
     'A scalable e-commerce platform with payment integration, inventory management, and admin dashboard.',
     ARRAY['React', 'Node.js', 'MongoDB', 'Stripe', 'AWS S3'],
     'https://github.com/yourusername/ecommerce',
-    'https://shop.example.com',
-    '/images/ecommerce.jpg'
+    'https://shop.example.com'
 );
 
 -- Insert sample experiences data
