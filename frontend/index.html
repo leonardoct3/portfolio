@@ -4,7 +4,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>Leo T.</title>
+    <style>
+      /* Fallback to ensure white background in light mode */
+      html:not(.dark) {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      html.dark {
+        background-color: #1f2937 !important;
+        color: #ffffff !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

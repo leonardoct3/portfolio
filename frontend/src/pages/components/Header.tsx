@@ -7,19 +7,24 @@ interface HeaderProps {
 }
 
 export const Header = ({ activeSection }: HeaderProps) => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false); // Default to light mode
 
   // Initialize dark mode on component mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     
+    // Only use dark mode if explicitly saved as dark, or if no preference and user prefers dark
     if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
       setIsDarkMode(true);
       document.documentElement.classList.add("dark");
     } else {
       setIsDarkMode(false);
       document.documentElement.classList.remove("dark");
+      // Explicitly ensure light mode
+      if (savedTheme === "light" || !savedTheme) {
+        localStorage.setItem("theme", "light");
+      }
     }
   }, []);
 
