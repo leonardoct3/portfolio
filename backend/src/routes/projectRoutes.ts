@@ -3,8 +3,10 @@ import {
     getProjects, 
     getProjectById, 
     createProject, 
+    createProjectWithUpload,
     updateProject, 
-    deleteProject 
+    deleteProject,
+    upload
 } from '../controllers/projectController.js';
 
 const router = Router();
@@ -15,8 +17,11 @@ router.get('/', getProjects);
 // GET /api/projects/:id - Get project by ID
 router.get('/:id', getProjectById);
 
-// POST /api/projects - Create a new project
+// POST /api/projects - Create a new project (JSON with base64 image)
 router.post('/', createProject);
+
+// POST /api/projects/upload - Create a new project with file upload
+router.post('/upload', upload.single('image'), createProjectWithUpload);
 
 // PUT /api/projects/:id - Update project by ID
 router.put('/:id', updateProject);
