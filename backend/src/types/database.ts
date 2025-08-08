@@ -17,7 +17,7 @@ export interface Database {
           technologies: string[]
           github_url: string | null
           live_url: string | null
-          image: Buffer | null
+          image_url: string | null
           created_at: string
           updated_at: string
         }
@@ -28,7 +28,7 @@ export interface Database {
           technologies: string[]
           github_url?: string | null
           live_url?: string | null
-          image?: Buffer | null
+          image_url?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -39,7 +39,7 @@ export interface Database {
           technologies?: string[]
           github_url?: string | null
           live_url?: string | null
-          image?: Buffer | null
+          image_url?: string | null
           created_at?: string
           updated_at?: string
         }

@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS projects (
     technologies TEXT[] NOT NULL,
     github_url VARCHAR(500),
     live_url VARCHAR(500),
-    image BYTEA,
+    image_url VARCHAR(500),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -145,3 +145,11 @@ GRANT INSERT ON contact_messages TO anon, authenticated;
 GRANT ALL ON projects TO authenticated;
 GRANT ALL ON experiences TO authenticated;
 GRANT ALL ON contact_messages TO authenticated;
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO anon, authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
+-- para objetos criados no futuro:
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT USAGE, SELECT ON SEQUENCES TO anon, authenticated;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
+GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public TO service_role;
