@@ -7,7 +7,7 @@ export class DatabaseService {
         const { data, error } = await supabaseAdmin
             .from('projects')
             .select('*')
-            .order('created_at', { ascending: false });
+            .order('updated_at', { ascending: false });
 
         if (error) {
             throw new Error(`Failed to fetch projects: ${error.message}`);
