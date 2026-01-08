@@ -67,3 +67,23 @@ export default tseslint.config([
   },
 ])
 ```
+
+## PWA Testing (iOS/Mobile)
+
+To test the Progressive Web App (PWA) features:
+
+1.  **Serve the app**: Run `npm run build` and then `npm run preview` to simulate a production environment (Service Workers works best in production builds or secure contexts).
+2.  **Open in iOS Safari**: Navigate to your local IP (e.g., `http://192.168.x.x:4173`).
+3.  **Add to Home Screen**:
+    *   Tap the "Share" button (box with arrow up).
+    *   Scroll down and tap "Add to Home Screen".
+    *   Confirm the name "LeoPorfolio".
+4.  **Verify Standalone Mode**:
+    *   Open the app from the home screen icon.
+    *   It should launch without the Safari address bar/UI (standalone mode).
+5.  **Offline Test**:
+    *   Turn on Airplane Mode.
+    *   Refresh or reopen the app. The "shell" (HTML/basics) should still load from cache.
+
+**Note**: iOS has limited PWA support compared to Android. Push notifications requires extra setup.
+
