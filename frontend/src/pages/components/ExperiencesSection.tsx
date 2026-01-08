@@ -11,6 +11,8 @@ interface Experience {
   end_date: string;
   description: string;
   skills: string[];
+  created_at: string;
+  updated_at: string;
 }
 
 interface ApiResponse<T> {
@@ -28,37 +30,31 @@ export const ExperiencesSection = () => {
 
   // Mock data as fallback
   const mockExperiences: Experience[] = [
-    {
-      id: 1,
-      title: "Software Engineer",
-      company: "Pickleball.com",
-      location: "Remote",
-      start_date: "Jan 2024",
-      end_date: "Present",
-      description: "Developed full-stack applications with React.js and Next.js. Lead the frontend development team, focusing on creating, improving, and fine-tuning web applications to make them fast and reliable. My job includes planning our technical approaches, guiding the team, and actively coding and reviewing code.",
-      skills: []
-    },
-    {
-      id: 2,
-      title: "Junior -> Senior -> Alumni",
-      company: "Bosnia and Herzegovina Futures Foundation",
-      location: "Sarajevo, BA",
-      start_date: "Sep 2021",
-      end_date: "Present", 
-      description: "Actively engaged in personal development, focusing on enhancing soft skills and public speaking abilities under experienced mentors. Transitioned into a mentorship role, guiding high school students in developing their soft skills and providing guidance in career planning and decision-making.",
-      skills: []
-    },
-    {
-      id: 3,
-      title: "Full Stack Developer",
-      company: "Atlantbh (Internship)",
-      location: "Sarajevo, BA",
-      start_date: "Feb 2022",
-      end_date: "May 2022",
-      description: "Developed full-stack applications with React.js and Spring Boot. Implemented essential software development practices such as GitHub for version control, Maven for project management, JUnit for testing, and applied design patterns and MVC architecture.",
-      skills: []
-    }
-  ];
+        {
+            "id": 4,
+            "title": "Trainee → Consultant → Senior Consultant → Projects Manager",
+            "company": "Insper Jr.",
+            "location": "São Paulo, BR",
+            "start_date": "Mar 2024",
+            "end_date": "Present",
+            "description": "Started by developing core technical and consulting skills through intensive training and participation in diverse projects, including web development, data analysis, and dashboard design. Took on increasing responsibilities in client-facing and technical roles, delivering end-to-end solutions that combined strategy, design, and implementation. Progressively assumed leadership responsibilities, mentoring team members, guiding technical decisions, and ensuring delivery quality across multiple projects. Currently oversee the Engineering and Tech areas, fostering member growth and implementing structured learning paths in Backend and Cloud, integrating FastAPI, SQLAlchemy, Supabase, and CI/CD deployments to production environments.",
+            "skills": [],
+            "created_at": "2025-08-08T13:51:47.023059+00:00",
+            "updated_at": "2025-08-08T13:55:28.057616+00:00"
+        },
+        {
+            "id": 5,
+            "title": "Summer Intern",
+            "company": "BTG Pactual",
+            "location": "São Paulo, BR",
+            "start_date": "Jul 2025",
+            "end_date": "Aug 2025",
+            "description": "Worked on the development of Java Quarkus-based AWS Lambdas triggered by EventBridge to integrate with internal APIs and microservices, generating financial reports and emergency alerts for officers and bankers. Operated end-to-end, from understanding the business context and designing the architecture to implementation and deployment using CloudFormation. Integrated solutions with DynamoDB and internal systems to ensure robust, scalable, and timely communication across critical processes.",
+            "skills": [],
+            "created_at": "2025-08-08T13:57:22.597217+00:00",
+            "updated_at": "2025-08-08T13:57:22.597217+00:00"
+        }
+    ];
 
   // Fetch experiences from API
   const fetchExperiences = async () => {

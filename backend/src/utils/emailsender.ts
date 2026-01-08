@@ -4,11 +4,17 @@ import type { ContactMessage } from '../models/types.js';
 // Email transporter configuration
 const createTransporter = () => {
     return nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
-        }
+        },
+        // Increased timeouts for production environments
+        connectionTimeout: 20000,
+        greetingTimeout: 20000,
+        socketTimeout: 20000
     });
 };
 

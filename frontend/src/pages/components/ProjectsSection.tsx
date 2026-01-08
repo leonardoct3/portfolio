@@ -55,43 +55,90 @@ export const ProjectsSection = () => {
         setError(err instanceof Error ? err.message : 'Failed to fetch projects');
         // Fallback data for development/demo purposes
         setProjects([
-          {
-            id: 1,
-            title: "Portfolio Website",
-            description: "A modern, responsive portfolio website built with React and TypeScript, featuring a clean design and smooth animations.",
-            technologies: ["React", "TypeScript", "Vite", "Express", "Supabase"],
-            github_url: "https://github.com/yourusername/portfolio",
-            live_url: "https://yourportfolio.com",
-            image_url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop&crop=center"
-          },
-          {
-            id: 2,
-            title: "Task Management App",
-            description: "A full-stack task management application with real-time updates, user authentication, and collaborative features.",
-            technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth.js"],
-            github_url: "https://github.com/yourusername/task-manager",
-            live_url: "https://taskmanager.example.com",
-            image_url: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop&crop=center"
-          },
-          {
-            id: 3,
-            title: "E-commerce Platform",
-            description: "A scalable e-commerce platform with payment integration, inventory management, and admin dashboard.",
-            technologies: ["React", "Node.js", "MongoDB", "Stripe", "AWS S3"],
-            github_url: "https://github.com/yourusername/ecommerce",
-            live_url: "https://shop.example.com",
-            image_url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop&crop=center"
-          },
-          {
-            id: 4,
-            title: "Weather Dashboard",
-            description: "A comprehensive weather application with forecasts, interactive maps, and location-based weather alerts.",
-            technologies: ["Vue.js", "TypeScript", "Chart.js", "OpenWeather API"],
-            github_url: "https://github.com/yourusername/weather-app",
-            live_url: "https://weather.example.com",
-            image_url: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=500&h=300&fit=crop&crop=center"
-          }
-        ]);
+        {
+            "id": 11,
+            "title": "ReddiView",
+            "description": "A Reddit client that lets you sign in with Reddit, browse and filter by subreddit, and upvote/downvote posts. Built with Create React App (CRA), React, Redux, and the Reddit API.",
+            "technologies": [
+                "React",
+                "Redux",
+                "CRA",
+                "Reddit API"
+            ],
+            "github_url": "https://github.com/leonardoct3/reddiview.git",
+            "live_url": "https://reddiview.netlify.app",
+            "image_url": "https://res.cloudinary.com/dd4ul1s1i/image/upload/v1754616562/67d17810-f495-4819-9014-3353cef8652b.png",
+            "created_at": "2025-08-08T01:37:10.168721+00:00",
+            "updated_at": "2025-08-12T23:36:01.604369+00:00"
+        },
+        {
+            "id": 10,
+            "title": "GP I",
+            "description": "Platform to appraise and manage Insper Jr.’s selective process, built with React + TypeScript (frontend), FastAPI (backend) and MongoDB. Includes role-based areas (director, coordinator, appraisers) and operational workflows for evaluations.",
+            "technologies": [
+                "React",
+                "TypeScript",
+                "Vite",
+                "FastAPI",
+                "MongoDB"
+            ],
+            "github_url": null,
+            "live_url": "https://gp-front-zeta.vercel.app/director/login",
+            "image_url": "https://res.cloudinary.com/dd4ul1s1i/image/upload/v1754614936/WhatsApp_Image_2025-08-07_at_21.05.50_eaa636a6_c2uoso.jpg",
+            "created_at": "2025-08-08T01:26:20.904969+00:00",
+            "updated_at": "2025-08-12T23:35:45.284472+00:00"
+        },
+        {
+            "id": 9,
+            "title": "Jammming",
+            "description": "Spotify web helper: search tracks, listen to previews, and create new playlists on Spotify using the Spotify Web API and user token.",
+            "technologies": [
+                "React",
+                "CRA",
+                "Spotify API",
+                "OAuth"
+            ],
+            "github_url": "https://github.com/leonardoct3/jammming",
+            "live_url": "https://unique-beignet-b03e4e.netlify.app",
+            "image_url": "https://res.cloudinary.com/dd4ul1s1i/image/upload/v1754658722/a4e17e43-b83f-4cfa-b3b6-a928a2267c0e.png",
+            "created_at": "2025-08-08T13:15:13.938137+00:00",
+            "updated_at": "2025-08-12T23:34:29.230656+00:00"
+        },
+        {
+            "id": 8,
+            "title": "PokeGame",
+            "description": "A Pokémon guessing game with scoreboard and Pokédex. Built with React + Vite (frontend) and Django (backend), integrating with the PokeAPI. Data is stored in a PostgreSQL database.",
+            "technologies": [
+                "React",
+                "Vite",
+                "Django",
+                "PostgreSQL",
+                "PokeAPI"
+            ],
+            "github_url": null,
+            "live_url": "https://projeto-2-frontend-felipe-e-leonardo.onrender.com",
+            "image_url": "https://res.cloudinary.com/dd4ul1s1i/image/upload/v1754615041/WhatsApp_Image_2025-08-07_at_20.49.50_97033334_gxd7uu.jpg",
+            "created_at": "2025-08-08T12:55:45.743153+00:00",
+            "updated_at": "2025-08-08T12:55:45.743153+00:00"
+        },
+        {
+            "id": 7,
+            "title": "Get-It",
+            "description": "Task manager (to-do) with tags for organization. Full CRUD for tasks and tags. Built as a full-stack Django app using SQLite for storage.",
+            "technologies": [
+                "Django",
+                "Python",
+                "SQLite",
+                "HTML",
+                "CSS"
+            ],
+            "github_url": null,
+            "live_url": "https://projeto-1b-leonardoct3-1.onrender.com",
+            "image_url": "https://res.cloudinary.com/dd4ul1s1i/image/upload/v1754615022/WhatsApp_Image_2025-08-07_at_20.59.12_b730d81d_syk0ae.jpg",
+            "created_at": "2025-08-08T01:44:00.71059+00:00",
+            "updated_at": "2025-08-08T01:44:00.71059+00:00"
+        }
+    ]);
       } finally {
         setLoading(false);
       }
