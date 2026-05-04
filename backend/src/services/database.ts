@@ -1,194 +1,150 @@
-import { supabaseAdmin } from '../config/supabase.js';
+import { pool } from '../config/db.js';
 import type { Project, Experience, ContactMessage } from '../models/types.js';
 
 export class DatabaseService {
-    // Project operations
     async getAllProjects(): Promise<Project[]> {
-        const { data, error } = await supabaseAdmin
-            .from('projects')
-            .select('*')
-            .order('updated_at', { ascending: false });
-
-        if (error) {
+        try {
+            const result = await pool.query('SELECT * FROM projects ORDER BY updated_at DESC');
+            return result.rows;
+        } catch (error: any) {
             throw new Error(`Failed to fetch projects: ${error.message}`);
         }
-
-        return data || [];
     }
 
     async getProjectById(id: number): Promise<Project | null> {
-        const { data, error } = await supabaseAdmin
-            .from('projects')
-            .select('*')
-            .eq('id', id)
-            .single();
-
-        if (error) {
-            if (error.code === 'PGRST116') {
-                return null; // Project not found
-            }
+        try {
+            const result = await pool.query('SELECT * FROM projects WHERE id = $1', [id]);
+            return result.rows.length ? result.rows[0] : null;
+        } catch (error: any) {
+            if (error.code === '22P02') return null;
             throw new Error(`Failed to fetch project: ${error.message}`);
         }
-
-        return data;
     }
 
     async createProject(project: Omit<Project, 'id' | 'created_at' | 'updated_at'>): Promise<Project> {
-        const { data, error } = await supabaseAdmin
-            .from('projects')
-            .insert([project])
-            .select()
-            .single();
-
-        if (error) {
+        try {
+            const result = await pool.query(
+                `INSERT INTO projects (title, description, technologies, github_url, live_url, image_url)
+                 VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+                [project.title, project.description, project.technologies, project.github_url, project.live_url, project.image_url]
+            );
+            return result.rows[0];
+        } catch (error: any) {
             throw new Error(`Failed to create project: ${error.message}`);
         }
-
-        return data;
     }
 
     async updateProject(id: number, updates: Partial<Omit<Project, 'id' | 'created_at'>>): Promise<Project> {
-        const updateData = {
-            ...updates,
-            updated_at: new Date().toISOString()
-        };
+        const keys = Object.keys(updates);
+        const values = Object.values(updates);
+        if (keys.length === 0) throw new Error('No updates provided');
+        
+        const setClause = keys.map((key, index) => `${key} = $${index + 2}`).join(', ');
 
-        const { data, error } = await supabaseAdmin
-            .from('projects')
-            .update(updateData)
-            .eq('id', id)
-            .select()
-            .single();
-
-        if (error) {
+        try {
+            const result = await pool.query(
+                `UPDATE projects SET ${setClause}, updated_at = NOW() WHERE id = $1 RETURNING *`,
+                [id, ...values]
+            );
+            if (result.rows.length === 0) throw new Error('Project not found');
+            return result.rows[0];
+        } catch (error: any) {
             throw new Error(`Failed to update project: ${error.message}`);
         }
-
-        return data;
     }
 
     async deleteProject(id: number): Promise<void> {
-        const { error } = await supabaseAdmin
-            .from('projects')
-            .delete()
-            .eq('id', id);
-
-        if (error) {
+        try {
+            await pool.query('DELETE FROM projects WHERE id = $1', [id]);
+        } catch (error: any) {
             throw new Error(`Failed to delete project: ${error.message}`);
         }
     }
 
-    // Experience operations
     async getAllExperiences(): Promise<Experience[]> {
-        const { data, error } = await supabaseAdmin
-            .from('experiences')
-            .select('*')
-            .order('start_date', { ascending: false });
-
-        if (error) {
+        try {
+            const result = await pool.query('SELECT * FROM experiences ORDER BY start_date DESC');
+            return result.rows;
+        } catch (error: any) {
             throw new Error(`Failed to fetch experiences: ${error.message}`);
         }
-
-        return data || [];
     }
 
     async getExperienceById(id: number): Promise<Experience | null> {
-        const { data, error } = await supabaseAdmin
-            .from('experiences')
-            .select('*')
-            .eq('id', id)
-            .single();
-
-        if (error) {
-            if (error.code === 'PGRST116') {
-                return null; // Experience not found
-            }
+        try {
+            const result = await pool.query('SELECT * FROM experiences WHERE id = $1', [id]);
+            return result.rows.length ? result.rows[0] : null;
+        } catch (error: any) {
             throw new Error(`Failed to fetch experience: ${error.message}`);
         }
-
-        return data;
     }
 
     async createExperience(experience: Omit<Experience, 'id' | 'created_at' | 'updated_at'>): Promise<Experience> {
-        const { data, error } = await supabaseAdmin
-            .from('experiences')
-            .insert([experience])
-            .select()
-            .single();
-
-        if (error) {
+        try {
+            const result = await pool.query(
+                `INSERT INTO experiences (title, company, location, start_date, end_date, description, skills)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+                [experience.title, experience.company, experience.location, experience.start_date, experience.end_date, experience.description, experience.skills]
+            );
+            return result.rows[0];
+        } catch (error: any) {
             throw new Error(`Failed to create experience: ${error.message}`);
         }
-
-        return data;
     }
 
     async updateExperience(id: number, updates: Partial<Omit<Experience, 'id' | 'created_at'>>): Promise<Experience> {
-        const updateData = {
-            ...updates,
-            updated_at: new Date().toISOString()
-        };
+        const keys = Object.keys(updates);
+        const values = Object.values(updates);
+        if (keys.length === 0) throw new Error('No updates provided');
 
-        const { data, error } = await supabaseAdmin
-            .from('experiences')
-            .update(updateData)
-            .eq('id', id)
-            .select()
-            .single();
+        const setClause = keys.map((key, index) => `${key} = $${index + 2}`).join(', ');
 
-        if (error) {
+        try {
+            const result = await pool.query(
+                `UPDATE experiences SET ${setClause}, updated_at = NOW() WHERE id = $1 RETURNING *`,
+                [id, ...values]
+            );
+            if (result.rows.length === 0) throw new Error('Experience not found');
+            return result.rows[0];
+        } catch (error: any) {
             throw new Error(`Failed to update experience: ${error.message}`);
         }
-
-        return data;
     }
 
     async deleteExperience(id: number): Promise<void> {
-        const { error } = await supabaseAdmin
-            .from('experiences')
-            .delete()
-            .eq('id', id);
-
-        if (error) {
+        try {
+            await pool.query('DELETE FROM experiences WHERE id = $1', [id]);
+        } catch (error: any) {
             throw new Error(`Failed to delete experience: ${error.message}`);
         }
     }
 
-    // Contact message operations
     async createContactMessage(message: Omit<ContactMessage, 'id' | 'created_at'>): Promise<ContactMessage> {
-        const { data, error } = await supabaseAdmin
-            .from('contact_messages')
-            .insert([message])
-            .select()
-            .single();
-
-        if (error) {
+        try {
+            const result = await pool.query(
+                `INSERT INTO contact_messages (name, email, subject, message)
+                 VALUES ($1, $2, $3, $4) RETURNING *`,
+                [message.name, message.email, message.subject, message.message]
+            );
+            return result.rows[0];
+        } catch (error: any) {
             throw new Error(`Failed to create contact message: ${error.message}`);
         }
-
-        return data;
     }
 
     async getAllContactMessages(): Promise<ContactMessage[]> {
-        const { data, error } = await supabaseAdmin
-            .from('contact_messages')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-        if (error) {
+        try {
+            const result = await pool.query('SELECT * FROM contact_messages ORDER BY created_at DESC');
+            return result.rows;
+        } catch (error: any) {
             throw new Error(`Failed to fetch contact messages: ${error.message}`);
         }
-
-        return data || [];
     }
 
     async deleteContactMessage(id: number): Promise<void> {
-        const { error } = await supabaseAdmin
-            .from('contact_messages')
-            .delete()
-            .eq('id', id);
-
-        if (error) {
+        try {
+            await pool.query('DELETE FROM contact_messages WHERE id = $1', [id]);
+        } catch (error: any) {
             throw new Error(`Failed to delete contact message: ${error.message}`);
         }
     }

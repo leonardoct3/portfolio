@@ -45,7 +45,11 @@ app.use('*', (_req, res) => {
 	res.status(404).json({ message: 'Route not found' });
 });
 
-app.listen(PORT, () => {
-	console.log(`🚀 Server is running on http://localhost:${PORT}`);
-	console.log(`📚 API Documentation: http://localhost:${PORT}/api`);
-});
+if (process.env.NODE_ENV !== 'test') {
+	app.listen(PORT, () => {
+		console.log(`🚀 Server is running on http://localhost:${PORT}`);
+		console.log(`📚 API Documentation: http://localhost:${PORT}/api`);
+	});
+}
+
+export default app;

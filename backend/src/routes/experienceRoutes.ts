@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { requireApiKey } from '../middleware/auth.js';
 import {
     getExperiences,
     getExperienceById,
@@ -16,12 +17,12 @@ router.get('/', getExperiences);
 router.get('/:id', getExperienceById);
 
 // POST /api/experiences - Create new experience
-router.post('/', createExperience);
+router.post('/', requireApiKey, createExperience);
 
 // PUT /api/experiences/:id - Update experience
-router.put('/:id', updateExperience);
+router.put('/:id', requireApiKey, updateExperience);
 
 // DELETE /api/experiences/:id - Delete experience
-router.delete('/:id', deleteExperience);
+router.delete('/:id', requireApiKey, deleteExperience);
 
 export default router;

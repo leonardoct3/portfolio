@@ -479,7 +479,7 @@ export const sendContactConfirmation = async (contactMessage: ContactMessage): P
                     
                     <div class="signature">
                         <div class="signature-name"><span class="brand-accent">Leo</span>nardo Teixeira</div>
-                        <div class="signature-title">Software Developer</div>
+                        <div class="signature-title">Software Engineer</div>
                     </div>
                 </div>
                 
@@ -513,7 +513,7 @@ If your inquiry is urgent, please feel free to mention that in your original mes
 
 Best regards,
 Leonardo Teixeira
-Software Developer
+Software Engineer
 
 ---
 This is an automated confirmation email from Leonardo Teixeira's portfolio.
