@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { requireApiKey } from '../middleware/auth.js';
 import { 
     getProjects, 
     getProjectById, 
@@ -16,12 +17,12 @@ router.get('/', getProjects);
 router.get('/:id', getProjectById);
 
 // POST /api/projects - Create a new project
-router.post('/', createProject);
+router.post('/', requireApiKey, createProject);
 
 // PUT /api/projects/:id - Update project by ID
-router.put('/:id', updateProject);
+router.put('/:id', requireApiKey, updateProject);
 
 // DELETE /api/projects/:id - Delete project by ID
-router.delete('/:id', deleteProject);
+router.delete('/:id', requireApiKey, deleteProject);
 
 export default router;
