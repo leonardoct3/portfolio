@@ -1,52 +1,91 @@
-import nodemailer from 'nodemailer';
+import { Resend, type CreateEmailOptions } from 'resend';
 import type { ContactMessage } from '../models/types.js';
 
-// Email transporter configuration
-const createTransporter = () => {
-    return nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        },
-        // Increased timeouts for production environments
-        connectionTimeout: 20000,
-        greetingTimeout: 20000,
-        socketTimeout: 20000
-    });
+let resendClient: Resend | null = null;
+
+const getRequiredEnv = (name: string): string => {
+    const value = process.env[name]?.trim();
+
+    if (!value) {
+        throw new Error(`${name} environment variable is required to send email`);
+    }
+
+    return value;
 };
+
+const getResendClient = (): Resend => {
+    if (!resendClient) {
+        resendClient = new Resend(getRequiredEnv('RESEND_API_KEY'));
+    }
+
+    return resendClient;
+};
+
+const escapeHtml = (value: string): string =>
+    value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+const formatEmailDate = (): string =>
+    new Date().toLocaleString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 
 export interface EmailOptions {
     to: string;
     subject: string;
     html: string;
     text?: string;
+    replyTo?: string;
 }
 
 export const sendEmail = async (options: EmailOptions): Promise<void> => {
     try {
-        const transporter = createTransporter();
-        
-        const mailOptions = {
-            from: process.env.EMAIL_FROM,
-            to: options.to,
+        const fromEmail = getRequiredEnv('EMAIL_FROM');
+        const toEmail = options.to.trim();
+
+        if (!toEmail) {
+            throw new Error('Email recipient is required');
+        }
+
+        const emailPayload: CreateEmailOptions = {
+            from: fromEmail,
+            to: toEmail,
             subject: options.subject,
             html: options.html,
-            text: options.text
+            ...(options.text ? { text: options.text } : {}),
+            ...(options.replyTo ? { replyTo: options.replyTo } : {})
         };
 
-        await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully to:', options.to);
+        const { data, error } = await getResendClient().emails.send(emailPayload);
+
+        if (error) {
+            console.error('Error sending email:', error);
+            throw new Error(error.message || 'Failed to send email through Resend');
+        }
+
+        console.log('Email sent successfully to:', toEmail, 'with ID:', data?.id);
     } catch (error) {
-        console.error('Error sending email:', error);
-        throw new Error('Failed to send email');
+        console.error('Exception caught sending email:', error);
+        throw error instanceof Error ? error : new Error('Failed to send email');
     }
 };
 
 export const sendContactNotification = async (contactMessage: ContactMessage): Promise<void> => {
     const { name, email, subject, message } = contactMessage;
+    const escapedName = escapeHtml(name);
+    const escapedEmail = escapeHtml(email);
+    const escapedSubject = escapeHtml(subject);
+    const escapedMessage = escapeHtml(message);
+    const sentAt = formatEmailDate();
     
     // HTML email template
     const htmlContent = `
@@ -81,8 +120,8 @@ export const sendContactNotification = async (contactMessage: ContactMessage): P
                 }
                 
                 .header {
-                    background: linear-gradient(135deg, #111827 0%, #374151 100%);
-                    color: white;
+                    background-color: #111827;
+                    color: #ffffff;
                     padding: 30px;
                     text-align: center;
                     position: relative;
@@ -102,11 +141,13 @@ export const sendContactNotification = async (contactMessage: ContactMessage): P
                     font-size: 24px;
                     font-weight: 700;
                     margin-bottom: 8px;
-                    letter-spacing: -0.025em;
+                    color: #ffffff;
+                    letter-spacing: 0;
                 }
                 
                 .header p {
                     font-size: 14px;
+                    color: #f3f4f6;
                     opacity: 0.9;
                     font-weight: 400;
                 }
@@ -228,47 +269,40 @@ export const sendContactNotification = async (contactMessage: ContactMessage): P
         </head>
         <body>
             <div class="email-container">
-                <div class="header">
-                    <h1>New Portfolio Contact</h1>
-                    <p>Someone has reached out through your portfolio website</p>
+                <div class="header" style="background-color: #111827; color: #ffffff; padding: 30px; text-align: center;">
+                    <h1 style="color: #ffffff; font-size: 24px; font-weight: 700; margin: 0 0 8px;">New Portfolio Contact</h1>
+                    <p style="color: #f3f4f6; font-size: 14px; margin: 0;">Someone has reached out through your portfolio website</p>
                 </div>
                 
                 <div class="content">
                     <div class="field-grid">
                         <div class="field">
                             <div class="field-label">Contact Name</div>
-                            <div class="field-value">${name}</div>
+                            <div class="field-value">${escapedName}</div>
                         </div>
                         
                         <div class="field">
                             <div class="field-label">Email Address</div>
                             <div class="field-value">
-                                <a href="mailto:${email}">${email}</a>
+                                <a href="mailto:${escapedEmail}">${escapedEmail}</a>
                             </div>
                         </div>
                         
                         <div class="field">
                             <div class="field-label">Subject</div>
-                            <div class="field-value">${subject}</div>
+                            <div class="field-value">${escapedSubject}</div>
                         </div>
                     </div>
                     
                     <div class="message-field">
                         <div class="field-label">Message Content</div>
-                        <div class="message-content">${message}</div>
+                        <div class="message-content">${escapedMessage}</div>
                     </div>
                 </div>
                 
                 <div class="footer">
                     <p>This notification was sent automatically from <span class="brand-accent">Leo</span>nardo Teixeira's portfolio contact form.</p>
-                    <div class="timestamp">Received on ${new Date().toLocaleDateString('en-US', { 
-                        weekday: 'long', 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    })}</div>
+                    <div class="timestamp">Received on ${sentAt}</div>
                 </div>
             </div>
         </body>
@@ -289,28 +323,26 @@ ${message}
 
 ---
 This notification was sent automatically from Leonardo Teixeira's portfolio contact form.
-Received on ${new Date().toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-})}
+Received on ${sentAt}
     `;
 
     const emailOptions: EmailOptions = {
-        to: process.env.EMAIL_TO || process.env.EMAIL_USER || '',
+        to: process.env.EMAIL_TO || process.env.EMAIL_USER || getRequiredEnv('EMAIL_TO'),
         subject: `[INTERNAL] Portfolio Contact: ${subject}`,
         html: htmlContent,
-        text: textContent
+        text: textContent,
+        replyTo: email
     };
 
     await sendEmail(emailOptions);
 };
 
 export const sendContactConfirmation = async (contactMessage: ContactMessage): Promise<void> => {
-    const { name, email, subject } = contactMessage;
+    const { name, email, subject, message } = contactMessage;
+    const escapedName = escapeHtml(name);
+    const escapedSubject = escapeHtml(subject);
+    const escapedMessage = escapeHtml(message);
+    const sentAt = formatEmailDate();
     
     const htmlContent = `
         <!DOCTYPE html>
@@ -344,8 +376,8 @@ export const sendContactConfirmation = async (contactMessage: ContactMessage): P
                 }
                 
                 .header {
-                    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-                    color: white;
+                    background-color: #dc2626;
+                    color: #ffffff;
                     padding: 40px 30px;
                     text-align: center;
                     position: relative;
@@ -365,11 +397,13 @@ export const sendContactConfirmation = async (contactMessage: ContactMessage): P
                     font-size: 28px;
                     font-weight: 700;
                     margin-bottom: 8px;
-                    letter-spacing: -0.025em;
+                    color: #ffffff;
+                    letter-spacing: 0;
                 }
                 
                 .header p {
                     font-size: 16px;
+                    color: #fff7f7;
                     opacity: 0.95;
                     font-weight: 400;
                 }
@@ -390,6 +424,16 @@ export const sendContactConfirmation = async (contactMessage: ContactMessage): P
                     font-size: 16px;
                     color: #374151;
                     margin-bottom: 20px;
+                }
+
+                .message-echo {
+                    margin-top: 16px;
+                    padding: 16px;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 8px;
+                    background-color: #f9fafb;
+                    color: #374151;
+                    white-space: pre-wrap;
                 }
                 
                 .subject-highlight {
@@ -462,18 +506,19 @@ export const sendContactConfirmation = async (contactMessage: ContactMessage): P
         </head>
         <body>
             <div class="email-container">
-                <div class="header">
-                    <h1>Message Received Successfully</h1>
-                    <p>Thank you for reaching out through my portfolio</p>
+                <div class="header" style="background-color: #dc2626; color: #ffffff; padding: 40px 30px; text-align: center;">
+                    <h1 style="color: #ffffff; font-size: 28px; font-weight: 700; margin: 0 0 8px;">Message Received Successfully</h1>
+                    <p style="color: #fff7f7; font-size: 16px; margin: 0;">Thank you for reaching out through my portfolio</p>
                 </div>
                 
                 <div class="content">
-                    <div class="greeting">Hello ${name},</div>
+                    <div class="greeting">Hello ${escapedName},</div>
                     
                     <div class="message-body">
-                        <p>Thank you for contacting me through my portfolio website. I have successfully received your message regarding <span class="subject-highlight">"${subject}"</span> and I appreciate you taking the time to reach out.</p>
+                        <p>Thank you for contacting me through my portfolio website. I have successfully received your message regarding <span class="subject-highlight">"${escapedSubject}"</span> and I appreciate you taking the time to reach out.</p>
                         <br />
                         <p>I will review your message carefully and respond as soon as possible. Typically, I aim to respond within 24-48 hours.</p>
+                        <div class="message-echo">${escapedMessage}</div>
                         
                     </div>
                     
@@ -486,14 +531,7 @@ export const sendContactConfirmation = async (contactMessage: ContactMessage): P
                 <div class="footer">
                     <p>This is an automated confirmation email from Leonardo Teixeira's portfolio.</p>
                     <p>Please do not reply directly to this email address.</p>
-                    <div class="timestamp">Sent on ${new Date().toLocaleDateString('en-US', { 
-                        weekday: 'long', 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    })}</div>
+                    <div class="timestamp">Sent on ${sentAt}</div>
                 </div>
             </div>
         </body>
@@ -509,6 +547,9 @@ Thank you for contacting me through my portfolio website. I have successfully re
 
 I will review your message carefully and respond as soon as possible. Typically, I aim to respond within 24-48 hours during business days.
 
+Your message:
+${message}
+
 If your inquiry is urgent, please feel free to mention that in your original message, and I will prioritize accordingly.
 
 Best regards,
@@ -518,19 +559,12 @@ Software Engineer
 ---
 This is an automated confirmation email from Leonardo Teixeira's portfolio.
 Please do not reply directly to this email address.
-Sent on ${new Date().toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-})}
+Sent on ${sentAt}
     `;
 
     const emailOptions: EmailOptions = {
         to: email,
-        subject: `Thank you for contacting me - ${subject}`,
+        subject: `Thank you for contacting me!`,
         html: htmlContent,
         text: textContent
     };
