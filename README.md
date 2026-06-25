@@ -2,7 +2,7 @@
 
 A full-stack personal portfolio by **Leonardo Teixeira** — a React + TypeScript single-page app backed by a Node/Express API and PostgreSQL. It showcases work experience, projects, and skills, and includes a working contact form that delivers email via [Resend](https://resend.com).
 
-> 🌐 **Live:** _add your deployed URL here_ &nbsp;·&nbsp; the production frontend talks to an API hosted on Railway.
+> 🌐 **Live:** _leoteixeira.me_ &nbsp;·&nbsp; the production frontend talks to an API hosted on Railway.
 
 ---
 
