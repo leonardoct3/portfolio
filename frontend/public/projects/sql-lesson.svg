@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ef4444"/>
+      <stop offset="1" stop-color="#b91c1c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- subtle grid -->
+  <g stroke="#e2e8f0" stroke-width="1" opacity="0.8">
+    <path d="M0 150 H1600 M0 300 H1600 M0 450 H1600 M0 600 H1600 M0 750 H1600"/>
+    <path d="M200 0 V900 M400 0 V900 M600 0 V900 M800 0 V900 M1000 0 V900 M1200 0 V900 M1400 0 V900"/>
+  </g>
+
+  <!-- accent bar -->
+  <rect x="110" y="170" width="90" height="10" rx="5" fill="url(#accent)"/>
+
+  <!-- title -->
+  <text x="110" y="290" fill="#0f172a" font-size="96" font-weight="800">SQL Lesson</text>
+  <text x="114" y="350" fill="#64748b" font-size="38" font-weight="500">Interactive Jupyter handouts · modeling · select · DML · joins</text>
+
+  <!-- code block -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="40">
+    <rect x="110" y="440" width="1380" height="340" rx="18" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+    <circle cx="156" cy="486" r="10" fill="#ef4444"/>
+    <circle cx="192" cy="486" r="10" fill="#f59e0b"/>
+    <circle cx="228" cy="486" r="10" fill="#22c55e"/>
+    <text x="156" y="572" fill="#dc2626" font-weight="700">SELECT</text>
+    <text x="330" y="572" fill="#334155">s.name, COUNT(g.id)</text>
+    <text x="156" y="628" fill="#dc2626" font-weight="700">FROM</text>
+    <text x="290" y="628" fill="#2563eb">students</text>
+    <text x="470" y="628" fill="#94a3b8">s</text>
+    <text x="156" y="684" fill="#dc2626" font-weight="700">JOIN</text>
+    <text x="290" y="684" fill="#2563eb">grades</text>
+    <text x="450" y="684" fill="#475569">g ON g.student_id = s.id</text>
+    <text x="156" y="740" fill="#dc2626" font-weight="700">GROUP BY</text>
+    <text x="410" y="740" fill="#334155">s.name;</text>
+  </g>
+</svg>

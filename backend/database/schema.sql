@@ -102,6 +102,38 @@ INSERT INTO projects (title, description, technologies, github_url, live_url, im
     NULL,
     'https://projeto-1b-leonardoct3-1.onrender.com',
     'https://res.cloudinary.com/dd4ul1s1i/image/upload/v1754615022/WhatsApp_Image_2025-08-07_at_20.59.12_b730d81d_syk0ae.jpg'
+),
+(
+    'SQL Lesson',
+    'Hands-on SQL teaching material I created and taught, delivered as four Jupyter notebook handouts covering data modeling, SELECT queries, DML, and JOINs. Each notebook pairs guided exercises with automated tests for instant feedback and ships with full answer keys.',
+    ARRAY['SQL', 'SQLite', 'Python', 'Jupyter'],
+    'https://github.com/leonardoct3/sql-lesson',
+    NULL,
+    '/projects/sql-lesson.svg'
+),
+(
+    'Lua Compiler',
+    'A compiler for the Lua language, written from scratch in Python. Implements the full pipeline — lexer, parser, AST, and semantic analysis with error reporting — and can either interpret programs directly or generate equivalent assembly (.asm) code.',
+    ARRAY['Python', 'Lua', 'Compilers', 'Assembly'],
+    'https://github.com/leonardoct3/logcomp',
+    NULL,
+    '/projects/lua-compiler.svg'
+),
+(
+    'Knight Escape',
+    'A 2D game built in Unity where you race to collect every coin scattered across the level as fast as you can, dodging bombs and enemies that drain your health. Playable in the browser on itch.io.',
+    ARRAY['Unity', 'C#'],
+    'https://github.com/leonardoct3/knight-escape',
+    'https://leonardoct3.itch.io/knight-escape',
+    'https://res.cloudinary.com/dd4ul1s1i/image/upload/v1782416146/ke_jeyv7a.png'
+),
+(
+    'GAMIFICACAO I',
+    'A construction-management platform that helps a construction company run its job sites — managing projects, employees, and daily attendance — and gamifies performance by awarding points to the teams with the best attendance, fastest delivery, and overall results.',
+    ARRAY['React', 'TypeScript', 'FastAPI', 'Supabase'],
+    NULL,
+    'https://btbinda-obra.vercel.app',
+    'https://res.cloudinary.com/dd4ul1s1i/image/upload/v1782415934/btb_vdqhfd.png'
 );
 
 -- Insert sample experiences data

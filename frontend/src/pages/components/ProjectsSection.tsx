@@ -57,6 +57,68 @@ export const ProjectsSection = () => {
         // Fallback data for development/demo purposes
         setProjects([
         {
+            "id": 15,
+            "title": "GAMIFICACAO I",
+            "description": "A construction-management platform that helps a construction company run its job sites — managing projects, employees, and daily attendance — and gamifies performance by awarding points to the teams with the best attendance, fastest delivery, and overall results.",
+            "technologies": [
+                "React",
+                "TypeScript",
+                "FastAPI",
+                "Supabase"
+            ],
+            "github_url": null,
+            "live_url": "https://btbinda-obra.vercel.app",
+            "image_url": "https://res.cloudinary.com/dd4ul1s1i/image/upload/v1782415934/btb_vdqhfd.png",
+            "created_at": "2026-01-21T00:00:00.000000+00:00",
+            "updated_at": "2026-01-21T00:00:00.000000+00:00"
+        },
+        {
+            "id": 12,
+            "title": "SQL Lesson",
+            "description": "Hands-on SQL teaching material I created and taught, delivered as four Jupyter notebook handouts covering data modeling, SELECT queries, DML, and JOINs. Each notebook pairs guided exercises with automated tests for instant feedback and ships with full answer keys.",
+            "technologies": [
+                "SQL",
+                "SQLite",
+                "Python",
+                "Jupyter"
+            ],
+            "github_url": "https://github.com/leonardoct3/sql-lesson",
+            "live_url": null,
+            "image_url": "/projects/sql-lesson.svg",
+            "created_at": "2026-01-20T00:00:00.000000+00:00",
+            "updated_at": "2026-01-20T00:00:00.000000+00:00"
+        },
+        {
+            "id": 13,
+            "title": "Lua Compiler",
+            "description": "A compiler for the Lua language, written from scratch in Python. Implements the full pipeline — lexer, parser, AST, and semantic analysis with error reporting — and can either interpret programs directly or generate equivalent assembly (.asm) code.",
+            "technologies": [
+                "Python",
+                "Lua",
+                "Compilers",
+                "Assembly"
+            ],
+            "github_url": "https://github.com/leonardoct3/logcomp",
+            "live_url": null,
+            "image_url": "/projects/lua-compiler.svg",
+            "created_at": "2026-01-19T00:00:00.000000+00:00",
+            "updated_at": "2026-01-19T00:00:00.000000+00:00"
+        },
+        {
+            "id": 14,
+            "title": "Knight Escape",
+            "description": "A 2D game built in Unity where you race to collect every coin scattered across the level as fast as you can, dodging bombs and enemies that drain your health. Playable in the browser on itch.io.",
+            "technologies": [
+                "Unity",
+                "C#"
+            ],
+            "github_url": "https://github.com/leonardoct3/knight-escape",
+            "live_url": "https://leonardoct3.itch.io/knight-escape",
+            "image_url": "https://res.cloudinary.com/dd4ul1s1i/image/upload/v1782416146/ke_jeyv7a.png",
+            "created_at": "2026-01-18T00:00:00.000000+00:00",
+            "updated_at": "2026-01-18T00:00:00.000000+00:00"
+        },
+        {
             "id": 11,
             "title": "ReddiView",
             "description": "A Reddit client that lets you sign in with Reddit, browse and filter by subreddit, and upvote/downvote posts. Built with Create React App (CRA), React, Redux, and the Reddit API.",
@@ -224,7 +286,7 @@ export const ProjectsSection = () => {
                             <img
                               src={project.image_url}
                               alt={project.title}
-                              className="w-full h-full object-cover bg-gray-50 dark:bg-gray-800"
+                              className="relative w-full h-full object-contain"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';

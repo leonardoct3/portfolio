@@ -38,7 +38,7 @@ import {
 import { FaJava } from 'react-icons/fa';
 import { VscAzure } from 'react-icons/vsc';
 // C# icon (simple-icons no longer ships one, so use Tabler's brand icon)
-import { TbBrandCSharp } from 'react-icons/tb';
+import { TbBrandCSharp, TbSql } from 'react-icons/tb';
 
 interface Skill {
   name: string;
@@ -61,6 +61,7 @@ export const SkillsSection = () => {
         { name: "C", icon: SiC, color: "text-gray-600 dark:text-gray-300" },
         { name: "C++", icon: SiCplusplus, color: "text-gray-600 dark:text-gray-300" },
         { name: "C#", icon: TbBrandCSharp, color: "text-gray-600 dark:text-gray-300" },
+        { name: "SQL", icon: TbSql, color: "text-gray-600 dark:text-gray-300" },
         { name: "TypeScript", icon: SiTypescript, color: "text-gray-600 dark:text-gray-300" },
         { name: "JavaScript", icon: SiJavascript, color: "text-gray-600 dark:text-gray-300" },
       ]
