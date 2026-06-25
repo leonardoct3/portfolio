@@ -111,8 +111,8 @@ INSERT INTO experiences (title, company, location, start_date, end_date, descrip
     'Insper Jr.',
     'São Paulo, BR',
     'Mar 2024',
-    'Present',
-    'Started by developing core technical and consulting skills through intensive training and participation in diverse projects, including web development, data analysis, and dashboard design. Took on increasing responsibilities in client-facing and technical roles, delivering end-to-end solutions that combined strategy, design, and implementation. Progressively assumed leadership responsibilities, mentoring team members, guiding technical decisions, and ensuring delivery quality across multiple projects. Currently oversee the Engineering and Tech areas, fostering member growth and implementing structured learning paths in Backend and Cloud, integrating FastAPI, SQLAlchemy, Supabase, and CI/CD deployments to production environments.',
+    'Jan 2026',
+    'Developed core technical and consulting skills through intensive training and diverse projects spanning web development, data analysis, and dashboard design. Took on growing client-facing and technical responsibility, delivering end-to-end solutions across strategy, design, and implementation. Progressed into leadership, mentoring members, guiding technical decisions, and ensuring delivery quality across projects. Oversaw the Engineering and Tech areas, fostering member growth and building structured Backend and Cloud learning paths with FastAPI, SQLAlchemy, Supabase, and CI/CD deployments to production.',
     ARRAY[]::TEXT[]
 ),
 (
@@ -121,7 +121,16 @@ INSERT INTO experiences (title, company, location, start_date, end_date, descrip
     'São Paulo, BR',
     'Jul 2025',
     'Aug 2025',
-    'Worked on the development of Java Quarkus-based AWS Lambdas triggered by EventBridge to integrate with internal APIs and microservices, generating financial reports and emergency alerts for officers and bankers. Operated end-to-end, from understanding the business context and designing the architecture to implementation and deployment using CloudFormation. Integrated solutions with DynamoDB and internal systems to ensure robust, scalable, and timely communication across critical processes.',
+    'Developed Java Quarkus AWS Lambdas triggered by EventBridge to integrate internal APIs and microservices, generating financial reports and emergency alerts for officers and bankers. Worked end-to-end, from business context and architecture design to implementation and deployment with CloudFormation. Integrated DynamoDB and internal systems to ensure robust, scalable, and timely communication across critical processes.',
+    ARRAY[]::TEXT[]
+),
+(
+    'Software Engineering Intern',
+    'BCG X',
+    'São Paulo, BR',
+    'Jan 2026',
+    'Present',
+    'Worked across two product teams within BCG X, contributing to full-stack and backend development on internal and client-facing platforms. On an internal staffing platform, helped design and deliver a role-based access control system governing what each user can view and act on based on their profile, built with React, FastAPI, and AWS. Currently a backend engineer on a fleet management SaaS, owning asset maintenance workflows and work order management on Spring Boot. Delivered new API endpoints, resolved production bugs, and refactored existing workflows and service architecture. Designed a dual-bucket S3 architecture with a staging/quarantine bucket and a private bucket to meet security and client requirements, now used across every document workflow on the platform.',
     ARRAY[]::TEXT[]
 );
 

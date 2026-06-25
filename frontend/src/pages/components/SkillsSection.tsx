@@ -1,35 +1,44 @@
 import { Card, CardContent } from "../../components/ui/card";
 // React Icons - Technology specific icons
-import { 
-  SiReact, 
-  SiTypescript, 
-  SiTailwindcss, 
-  SiJavascript, 
-  SiHtml5, 
+import {
+  SiReact,
+  SiReactrouter,
+  SiReactquery,
+  SiVite,
+  SiTypescript,
+  SiTailwindcss,
+  SiJavascript,
+  SiHtml5,
   SiCss3,
+  SiPython,
+  SiC,
+  SiCplusplus,
+  SiUnity,
   SiExpress,
   SiPostgresql,
   SiMongodb,
   SiSupabase,
   SiGit,
   SiVercel,
-  SiNetlify,
-  SiRender,
+  SiDocker,
   SiAmazon,
+  SiAmazons3,
   SiLinux,
   SiFigma,
+  SiSpringboot,
   SiQuarkus,
   SiFastapi,
   SiDjango,
   SiAmazondynamodb,
   SiGithub,
-  SiStyledcomponents,
   SiJupyter
 } from 'react-icons/si';
 
 // Import Java Icon
 import { FaJava } from 'react-icons/fa';
-import { VscCode, VscDatabase, VscAzure } from 'react-icons/vsc';
+import { VscAzure } from 'react-icons/vsc';
+// C# icon (simple-icons no longer ships one, so use Tabler's brand icon)
+import { TbBrandCSharp } from 'react-icons/tb';
 
 interface Skill {
   name: string;
@@ -45,15 +54,27 @@ interface SkillCategory {
 export const SkillsSection = () => {
   const skillCategories: SkillCategory[] = [
     {
+      title: "Languages",
+      skills: [
+        { name: "Python", icon: SiPython, color: "text-gray-600 dark:text-gray-300" },
+        { name: "Java", icon: FaJava, color: "text-gray-600 dark:text-gray-300" },
+        { name: "C", icon: SiC, color: "text-gray-600 dark:text-gray-300" },
+        { name: "C++", icon: SiCplusplus, color: "text-gray-600 dark:text-gray-300" },
+        { name: "C#", icon: TbBrandCSharp, color: "text-gray-600 dark:text-gray-300" },
+        { name: "TypeScript", icon: SiTypescript, color: "text-gray-600 dark:text-gray-300" },
+        { name: "JavaScript", icon: SiJavascript, color: "text-gray-600 dark:text-gray-300" },
+      ]
+    },
+    {
       title: "Frontend",
       skills: [
         { name: "React", icon: SiReact, color: "text-gray-600 dark:text-gray-300" },
-        { name: "TypeScript", icon: SiTypescript, color: "text-gray-600 dark:text-gray-300" },
-        { name: "JavaScript", icon: SiJavascript, color: "text-gray-600 dark:text-gray-300" },
+        { name: "React Router", icon: SiReactrouter, color: "text-gray-600 dark:text-gray-300" },
+        { name: "React Query", icon: SiReactquery, color: "text-gray-600 dark:text-gray-300" },
+        { name: "Vite", icon: SiVite, color: "text-gray-600 dark:text-gray-300" },
         { name: "HTML5", icon: SiHtml5, color: "text-gray-600 dark:text-gray-300" },
         { name: "CSS3", icon: SiCss3, color: "text-gray-600 dark:text-gray-300" },
         { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-gray-600 dark:text-gray-300" },
-        { name: "Styled Components", icon: SiStyledcomponents, color: "text-gray-600 dark:text-gray-300" },
       ]
     },
     {
@@ -62,7 +83,7 @@ export const SkillsSection = () => {
         { name: "Express", icon: SiExpress, color: "text-gray-600 dark:text-gray-300" },
         { name: "FastAPI", icon: SiFastapi, color: "text-gray-600 dark:text-gray-300" },
         { name: "Django", icon: SiDjango, color: "text-gray-600 dark:text-gray-300" },
-        { name: "Java", icon: FaJava, color: "text-gray-600 dark:text-gray-300" },
+        { name: "Spring Boot", icon: SiSpringboot, color: "text-gray-600 dark:text-gray-300" },
         { name: "Quarkus", icon: SiQuarkus, color: "text-gray-600 dark:text-gray-300" },
         { name: "PostgreSQL", icon: SiPostgresql, color: "text-gray-600 dark:text-gray-300" },
         { name: "MongoDB", icon: SiMongodb, color: "text-gray-600 dark:text-gray-300" },
@@ -71,13 +92,14 @@ export const SkillsSection = () => {
       ]
     },
     {
-      title: "Others",
+      title: "Tools & Cloud",
       skills: [
         { name: "AWS", icon: SiAmazon, color: "text-gray-600 dark:text-gray-300" },
+        { name: "Amazon S3", icon: SiAmazons3, color: "text-gray-600 dark:text-gray-300" },
         { name: "Azure DevOps", icon: VscAzure, color: "text-gray-600 dark:text-gray-300" },
+        { name: "Docker", icon: SiDocker, color: "text-gray-600 dark:text-gray-300" },
         { name: "Vercel", icon: SiVercel, color: "text-gray-600 dark:text-gray-300" },
-        { name: "Netlify", icon: SiNetlify, color: "text-gray-600 dark:text-gray-300" },
-        { name: "Render", icon: SiRender, color: "text-gray-600 dark:text-gray-300" },
+        { name: "Unity", icon: SiUnity, color: "text-gray-600 dark:text-gray-300" },
         { name: "Git", icon: SiGit, color: "text-gray-600 dark:text-gray-300" },
         { name: "GitHub", icon: SiGithub, color: "text-gray-600 dark:text-gray-300" },
         { name: "Jupyter", icon: SiJupyter, color: "text-gray-600 dark:text-gray-300" },

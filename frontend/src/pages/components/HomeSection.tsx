@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const useTypewriter = (texts: string[], typingSpeed = 150, deletingSpeed = 100, pauseTime = 2000) => {
   const [displayText, setDisplayText] = useState('');
@@ -36,11 +37,17 @@ const useTypewriter = (texts: string[], typingSpeed = 150, deletingSpeed = 100, 
 };
 
 export const HomeSection = () => {
+  const navigate = useNavigate();
+  
   const typewriterText = useTypewriter([
     "Full Stack Developer",
     "Computer Engineer"
   ]);
-
+  
+  const goToLinkedin = () => {
+    navigate("https://linkedin.com/in/leocteixeira");
+  }
+  
   return (
     <section id="home" className="min-h-[90vh] flex items-center justify-center px-6 py-20">
       <div className="max-w-6xl mx-auto w-full">
@@ -89,10 +96,7 @@ export const HomeSection = () => {
               </button>
               <button 
                 className="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white border-2 border-black dark:border-white transition-all duration-300 shadow-lg hover:shadow-xl"
-                onClick={() => {
-                  const element = document.getElementById('about');
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={goToLinkedin}
               >
                 Read More About Me
               </button>

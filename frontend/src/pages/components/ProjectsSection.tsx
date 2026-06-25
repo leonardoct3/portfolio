@@ -9,6 +9,7 @@ import {
   type CarouselApi,
 } from "../../components/ui/carousel";
 import { Button } from "../../components/ui/button";
+import { Badge } from "../../components/ui/badge";
 import { ExternalLink, Github, Loader2 } from "lucide-react";
 import { config } from "../../config/config";
 
@@ -209,21 +210,21 @@ export const ProjectsSection = () => {
               }}
               className="w-full"
             >
-              <CarouselContent className="-ml-2 md:-ml-4">
+              <CarouselContent className="-ml-2 md:-ml-4 py-4">
                 {projects.map((project) => (
                   <CarouselItem key={project.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                    <Card className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 shadow-md h-full">
+                    <Card className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 shadow-md h-full hover:shadow-lg hover:border-red-500 dark:hover:border-red-500 hover:-translate-y-1 transition-all duration-300">
                       <CardContent className="p-4 md:p-6 flex flex-col h-full">
                         <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-gray-900 dark:text-white">
                           {project.title}
                         </h3>
                         
                         {project.image_url && (
-                          <div className="mb-3 md:mb-4 overflow-hidden rounded-lg">
-                            <img 
-                              src={project.image_url} 
+                          <div className="mb-3 md:mb-4 overflow-hidden rounded-lg aspect-video">
+                            <img
+                              src={project.image_url}
                               alt={project.title}
-                              className="w-full object-contain bg-gray-50 dark:bg-gray-800"
+                              className="w-full h-full object-cover bg-gray-50 dark:bg-gray-800"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
@@ -232,10 +233,24 @@ export const ProjectsSection = () => {
                           </div>
                         )}
                         
-                        <p className="text-gray-600 dark:text-gray-400 mb-4 md:mb-6 flex-grow text-sm leading-relaxed">
+                        <p className="text-gray-600 dark:text-gray-400 mb-4 flex-grow text-sm leading-relaxed">
                           {project.description}
                         </p>
-                        
+
+                        {project.technologies && project.technologies.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 mb-4 md:mb-6">
+                            {project.technologies.map((tech) => (
+                              <Badge
+                                key={tech}
+                                variant="secondary"
+                                className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-950/40 hover:text-red-700 dark:hover:text-red-400 transition-colors"
+                              >
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+
                         <div className="flex gap-2 md:gap-3 mt-auto">
                           {project.github_url && (
                             <Button 

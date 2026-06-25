@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { MapPin, Loader2 } from "lucide-react";
+import { MapPin, Calendar, Loader2 } from "lucide-react";
+import { Badge } from "../../components/ui/badge";
 import { config } from "../../config/config";
 
 interface Experience {
@@ -31,13 +32,25 @@ export const ExperiencesSection = () => {
   // Mock data as fallback
   const mockExperiences: Experience[] = [
         {
+            "id": 6,
+            "title": "Software Engineering Intern",
+            "company": "BCG X",
+            "location": "São Paulo, BR",
+            "start_date": "Jan 2026",
+            "end_date": "Present",
+            "description": "Worked across two product teams within BCG X, contributing to full-stack and backend development on internal and client-facing platforms. On an internal staffing platform, helped design and deliver a role-based access control system governing what each user can view and act on based on their profile, built with React, FastAPI, and AWS. Currently a backend engineer on a fleet management SaaS, owning asset maintenance workflows and work order management on Spring Boot. Delivered new API endpoints, resolved production bugs, and refactored existing workflows and service architecture. Designed a dual-bucket S3 architecture with a staging/quarantine bucket and a private bucket to meet security and client requirements, now used across every document workflow on the platform.",
+            "skills": [],
+            "created_at": "2026-01-15T00:00:00.000000+00:00",
+            "updated_at": "2026-01-15T00:00:00.000000+00:00"
+        },
+        {
             "id": 4,
             "title": "Trainee → Consultant → Senior Consultant → Projects Manager",
             "company": "Insper Jr.",
             "location": "São Paulo, BR",
             "start_date": "Mar 2024",
-            "end_date": "Present",
-            "description": "Started by developing core technical and consulting skills through intensive training and participation in diverse projects, including web development, data analysis, and dashboard design. Took on increasing responsibilities in client-facing and technical roles, delivering end-to-end solutions that combined strategy, design, and implementation. Progressively assumed leadership responsibilities, mentoring team members, guiding technical decisions, and ensuring delivery quality across multiple projects. Currently oversee the Engineering and Tech areas, fostering member growth and implementing structured learning paths in Backend and Cloud, integrating FastAPI, SQLAlchemy, Supabase, and CI/CD deployments to production environments.",
+            "end_date": "Jan 2026",
+            "description": "Developed core technical and consulting skills through intensive training and diverse projects spanning web development, data analysis, and dashboard design. Took on growing client-facing and technical responsibility, delivering end-to-end solutions across strategy, design, and implementation. Progressed into leadership, mentoring members, guiding technical decisions, and ensuring delivery quality across projects. Oversaw the Engineering and Tech areas, fostering member growth and building structured Backend and Cloud learning paths with FastAPI, SQLAlchemy, Supabase, and CI/CD deployments to production.",
             "skills": [],
             "created_at": "2025-08-08T13:51:47.023059+00:00",
             "updated_at": "2025-08-08T13:55:28.057616+00:00"
@@ -49,7 +62,7 @@ export const ExperiencesSection = () => {
             "location": "São Paulo, BR",
             "start_date": "Jul 2025",
             "end_date": "Aug 2025",
-            "description": "Worked on the development of Java Quarkus-based AWS Lambdas triggered by EventBridge to integrate with internal APIs and microservices, generating financial reports and emergency alerts for officers and bankers. Operated end-to-end, from understanding the business context and designing the architecture to implementation and deployment using CloudFormation. Integrated solutions with DynamoDB and internal systems to ensure robust, scalable, and timely communication across critical processes.",
+            "description": "Developed Java Quarkus AWS Lambdas triggered by EventBridge to integrate internal APIs and microservices, generating financial reports and emergency alerts for officers and bankers. Worked end-to-end, from business context and architecture design to implementation and deployment with CloudFormation. Integrated DynamoDB and internal systems to ensure robust, scalable, and timely communication across critical processes.",
             "skills": [],
             "created_at": "2025-08-08T13:57:22.597217+00:00",
             "updated_at": "2025-08-08T13:57:22.597217+00:00"
@@ -147,15 +160,35 @@ export const ExperiencesSection = () => {
                   {/* Experience Card - Skills card style */}
                   <div className="bg-white dark:bg-gray-900 rounded-lg p-6 border-2 border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-l transition-all duration-300 hover:scale-105">
                     {/* Company Name */}
-                    <h3 className="text-lg font-bold text-red-600 mb-2">
+                    <h3 className="text-lg font-bold text-red-600 mb-1">
                       {experience.company}
                     </h3>
-                    
-                    {/* Title and Date */}
+
+                    {/* Title */}
                     <h4 className="text-md font-semibold text-black dark:text-white mb-3">
-                      {experience.title}/{experience.start_date} - {experience.end_date}
+                      {experience.title}
                     </h4>
-                    
+
+                    {/* Date and Location badges */}
+                    <div className="flex flex-wrap items-center gap-2 mb-4">
+                      <Badge
+                        variant="secondary"
+                        className="bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-900/50"
+                      >
+                        <Calendar className="w-3 h-3" />
+                        {experience.start_date} – {experience.end_date}
+                      </Badge>
+                      {experience.location && (
+                        <Badge
+                          variant="secondary"
+                          className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                        >
+                          <MapPin className="w-3 h-3" />
+                          {experience.location}
+                        </Badge>
+                      )}
+                    </div>
+
                     {/* Description with bullet points */}
                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
                       {experience.description.split('. ').map((sentence, i) => (
