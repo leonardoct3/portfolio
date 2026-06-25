@@ -17,10 +17,9 @@ export const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: "https://github.com/your-username", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/your-profile", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/your-handle", label: "Twitter" },
-    { icon: Mail, href: "mailto:your-email@example.com", label: "Email" },
+    { icon: Github, href: "https://github.com/leonardoct3", label: "GitHub" },
+    { icon: Linkedin, href: "https://linkedin.com/in/leocteixeira", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:leocarvalhoteixeira@gmail.com", label: "Email" },
   ];
 
   return (
@@ -68,7 +67,7 @@ export const Footer = () => {
 
           {/* Copyright */}
           <div className="text-center text-gray-500 dark:text-gray-400">
-            <p>&copy; 2025 Leonardo. All rights reserved.</p>
+            <p>&copy; 2026 Leonardo Teixeira. All rights reserved.</p>
           </div>
         </div>
       </div>

@@ -63,7 +63,12 @@ export class DatabaseService {
 
     async getAllExperiences(): Promise<Experience[]> {
         try {
-            const result = await pool.query('SELECT * FROM experiences ORDER BY start_date DESC');
+            // Dates are stored as text like "Mar 2024" (and "Present" for ongoing
+            // roles). Sort by end_date, most recent first, treating "Present" as the
+            // latest by mapping it to an infinite date.
+            const result = await pool.query(
+                "SELECT * FROM experiences ORDER BY (CASE WHEN end_date = 'Present' THEN 'infinity'::date ELSE TO_DATE(end_date, 'Mon YYYY') END) DESC"
+            );
             return result.rows;
         } catch (error: any) {
             throw new Error(`Failed to fetch experiences: ${error.message}`);
